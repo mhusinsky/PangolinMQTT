@@ -26,9 +26,16 @@ SOFTWARE.
 
 PANG_MEM_POOL       mb::pool;
 
-mb::mb(size_t l,uint8_t* d,uint16_t i,ADFP f,bool track): len(l),id(i),data(d),frag(f),managed(track){ manage(); } // always unmanaged - should only be called by onData
+mb::mb(size_t l,uint8_t* d,uint16_t i,ADFP f,bool track): managed(track){ // always unmanaged - sould only be called by onData
+	len=l;
+	data=d;
+	frag=f;
+	id=i;
+    manage();
+}
 
-mb::mb(ADFP p, bool track): data(p),managed(track) {
+mb::mb(ADFP p, bool track): managed(track) {
+    data=p;
     uint32_t multiplier = 1;
     uint32_t value = 0;
     uint8_t encodedByte;//,rl=0;

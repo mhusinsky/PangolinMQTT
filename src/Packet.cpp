@@ -155,7 +155,13 @@ ConnectPacket::ConnectPacket(): Packet(CONNECT,10){
 }
 
 PublishPacket::PublishPacket(const char* topic, uint8_t qos, bool retain, const uint8_t* payload, size_t length, bool dup,uint16_t givenId):
-    _topic(topic),_qos(qos),_retain(retain),_length(length),_dup(dup),_givenId(givenId),Packet(PUBLISH) {
+    Packet(PUBLISH) {
+		_topic=topic;
+		_qos=qos;
+		_retain=retain;
+		_length=length;
+		_dup=dup;
+		_givenId=givenId;
         if(length < PANGO::LIN->getMaxPayloadSize()){
             _begin=[this]{ 
                 _stringblock(CSTR(_topic));
